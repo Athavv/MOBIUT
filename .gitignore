@@ -1,0 +1,23 @@
+# Backend
+appsae/target/
+appsae/.mvn/
+appsae/uploads/
+*.class
+*.jar
+*.war
+
+# Frontend
+AppSAE-front/node_modules/
+AppSAE-front/.expo/
+AppSAE-front/dist/
+AppSAE-front/.env.local
+AppSAE-front/.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.iml
+.vscode/

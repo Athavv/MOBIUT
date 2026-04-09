@@ -1,0 +1,31 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: appsae-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: sae_archive
+      MYSQL_USER: sae_user
+      MYSQL_PASSWORD: sae_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - db_data:/var/lib/mysql
+
+  back:
+    build:
+      context: .
+    container_name: appsae-back
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/sae_archive?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: sae_user
+      SPRING_DATASOURCE_PASSWORD: sae_password
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./uploads:/app/uploads
+
+volumes:
+  db_data:
